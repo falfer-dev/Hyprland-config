@@ -1,0 +1,118 @@
+/* =============================================================================
+ * CONFIGURACIÓN GLOBAL DE WAYBAR
+ * ============================================================================= */
+
+/* Reinicio de estilos básicos y fuente global */
+* {
+    font-family: "JetBrainsMono Nerd Font", "Ubuntu Nerd Font", sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+
+/* Contenedor principal de la barra (fondo transparente para el efecto flotante) */
+window#waybar {
+    background-color: rgba(0, 0, 0, 0);
+    color: #ffffff;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+/* Margen interno para forzar la separación si usas el modo 'top' */
+window#waybar > box {
+    margin: 6px 10px;
+}
+
+/* =============================================================================
+ * ESTILOS DE MÓDULOS DE CONFIGURACIÓN COMÚN (Efecto Píldora / Bloques)
+ * ============================================================================= */
+#workspaces,
+#mode,
+#window,
+#idle_inhibitor,
+#backlight,
+#wireplumber,
+#battery,
+#temperature,
+#clock {
+    background-color: rgba(30, 30, 46, 0.75); /* Fondo oscuro semi-transparente */
+    color: #cdd6f4;                            /* Texto claro */
+    padding: 2px 12px;
+    margin: 4px 4px;
+    border-radius: 12px;                       /* Bordes muy redondeados */
+    border: 1px solid rgba(255, 255, 255, 0.1);/* Sutil borde translúcido */
+    transition: background-color 0.2s ease;    /* Suaviza los cambios de color */
+}
+/* =============================================================================
+ * DETALLES ESPECÍFICOS DE LOS MÓDULOS
+ * ============================================================================= */
+
+/* Bloque izquierdo: Espacios de Trabajo (Workspaces) */
+#workspaces button {
+    padding: 0 4px;
+    color: #6c7086;
+    background-color: transparent;
+}
+
+#workspaces button.active {
+    color: #ca9ee6; /* Color pastel para el espacio seleccionado */
+    font-weight: bold;
+}
+
+#workspaces button.urgent {
+    color: #e78284;
+}
+
+#workspaces button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+/* Bloque central: Ventana activa */
+#window {
+    background-color: rgba(41, 44, 60, 0.6);
+    color: #cdd6f4;
+}
+
+/* Bloques derechos: Alertas y Estados */
+#idle_inhibitor.activated {
+    background-color: rgba(231, 130, 132, 0.2);
+    color: #e78284;
+}
+
+#temperature.critical {
+    background-color: rgba(231, 130, 132, 0.8);
+    color: #303446;
+}
+
+#battery.critical:not(.charging) {
+    background-color: rgba(231, 130, 132, 0.8);
+    color: #303446;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#battery.charging {
+    color: #a6d189; /* Verde pastel al cargar */
+}
+
+/* Reloj (Último elemento de la derecha en tu configuración) */
+#clock {
+    color: #b4befe;
+    font-weight: bold;
+    margin-right: 0px;
+}
+
+/* Animación de parpadeo para batería baja */
+@keyframes blink {
+    to {
+        background-color: rgba(231, 130, 132, 0.2);
+        color: #e78284;
+    }
+}
+
